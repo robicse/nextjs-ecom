@@ -44,13 +44,14 @@ const ProductDetails = (props) => {
       discount: item.discount,
       id: item.id,
       rating: 2,
-      imgGroup: item.photos.map((img,index)=>`${BASE_URL}/public/${img}`)
+      imgGroup: item.photos.map((img,index)=>`${BASE_URL}/public/${img}`),
+      description: item?.description
     }
   }
   const {productDetails, shopList} = props
+  console.log('productDetails',productDetails)
   const product = itemChange(productDetails);
-
-  console.log(product)
+  console.log('product',product)
   // {
   //   price: 168,
   //   title: "Lord 2019",
@@ -106,7 +107,7 @@ const ProductDetails = (props) => {
         </StyledTabs>
 
         <Box mb={6}>
-          {selectedOption === 0 && <ProductDescription />}
+          {selectedOption === 0 && <ProductDescription product={product} />}
           {selectedOption === 1 && <ProductReview />}
         </Box>
 
@@ -114,7 +115,7 @@ const ProductDetails = (props) => {
           <FrequentlyBought productsData={frequentlyBought} />
         )} */}
 
-        <AvailableShops shopList={shopList}/>
+        {/* <AvailableShops shopList={shopList}/> */}
 
         {relatedProducts && <RelatedProducts productsData={relatedProducts} />}
       </Container>
@@ -125,7 +126,7 @@ const ProductDetails = (props) => {
 
 export  const getStaticPaths = async()=> {
 
-  const newArrivalProduct = await api.getNewArrivalList();
+  const newArrivalProduct = await api.getNewArrivalProductList();
   const paths =newArrivalProduct.slice(0, 3).map((item)=>{
    return{
      params: {
@@ -141,11 +142,11 @@ export  const getStaticPaths = async()=> {
 
 export  const getStaticProps = async(context)=> {
   const productDetails = await api.getProductDetailsById(context.params.id)
-  const shopList = await vendorApi.getSellerList()
+  // const shopList = await vendorApi.getSellerList()
  return {
    props: {
     productDetails,
-    shopList
+    // shopList
    }
  }
 }

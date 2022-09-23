@@ -15,7 +15,8 @@ import { FlexBox, FlexRowCenter } from "../flex-box"; // =======================
 
 // ================================================================
 const ProductIntro = ({ product }) => {
-  const { id, price, title, imgGroup } = product;
+  console.log('product1',product);
+  const { id, price, title, imgGroup, brand, rating } = product;
   const router = useRouter();
   const routerId = router.query.id;
   const [selectedImage, setSelectedImage] = useState(0);
@@ -116,20 +117,20 @@ const ProductIntro = ({ product }) => {
 
           <FlexBox alignItems="center" mb={2}>
             <Box>Brand:</Box>
-            <H6 ml={1}>Xiaomi</H6>
+            <H6 ml={1}>{brand}</H6>
           </FlexBox>
 
           <FlexBox alignItems="center" mb={2}>
             <Box lineHeight="1">Rated:</Box>
             <Box mx={1} lineHeight="1">
-              <BazarRating color="warn" fontSize="1.25rem" value={4} readOnly />
+              <BazarRating color="warn" fontSize="1.25rem" value={rating} readOnly />
             </Box>
             <H6 lineHeight="1">(50)</H6>
           </FlexBox>
 
           <Box mb={3}>
             <H2 color="primary.main" mb={0.5} lineHeight="1">
-              ${price.toFixed(2)}
+              TK.{price.toFixed(2)}
             </H2>
             <Box color="inherit">Stock Available</Box>
           </Box>
@@ -179,14 +180,14 @@ const ProductIntro = ({ product }) => {
             </FlexBox>
           )}
 
-          <FlexBox alignItems="center" mb={2}>
+          {/* <FlexBox alignItems="center" mb={2}>
             <Box>Sold By:</Box>
             <Link href="/shops/fdfdsa">
               <a>
                 <H6 ml={1}>Mobile Store</H6>
               </a>
             </Link>
-          </FlexBox>
+          </FlexBox> */}
         </Grid>
       </Grid>
     </Box>

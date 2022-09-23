@@ -2986,6 +2986,11 @@
   dependencies:
     "react-is" "^16.7.0"
 
+"html-entities@^2.3.3":
+  "integrity" "sha512-DV5Ln36z34NNTDgnz0EWGBLZENelNAtkiFA4kyNOG2tDI6Mz1uSWiq1wAKdyjnJwyDiDO7Fa2SO1CTxPXL8VxA=="
+  "resolved" "https://registry.npmjs.org/html-entities/-/html-entities-2.3.3.tgz"
+  "version" "2.3.3"
+
 "html-tokenize@^2.0.0":
   "integrity" "sha512-QY6S+hZ0f5m1WT8WffYN+Hg+xm/w5I8XeUcAq/ZYP5wVC8xbKi4Whhru3FtrAebD5EhBW8rmFzkDI6eCAuFe2w=="
   "resolved" "https://registry.npmjs.org/html-tokenize/-/html-tokenize-2.0.1.tgz"
@@ -3389,10 +3394,20 @@
   "resolved" "https://registry.npmjs.org/lodash-es/-/lodash-es-4.17.21.tgz"
   "version" "4.17.21"
 
+"lodash.clonedeep@^4.5.0":
+  "integrity" "sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ=="
+  "resolved" "https://registry.npmjs.org/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz"
+  "version" "4.5.0"
+
 "lodash.debounce@^4.0.6", "lodash.debounce@^4.0.8":
   "integrity" "sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow=="
   "resolved" "https://registry.npmjs.org/lodash.debounce/-/lodash.debounce-4.0.8.tgz"
   "version" "4.0.8"
+
+"lodash.isplainobject@^4.0.6":
+  "integrity" "sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA=="
+  "resolved" "https://registry.npmjs.org/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz"
+  "version" "4.0.6"
 
 "lodash.memoize@^4.1.2":
   "integrity" "sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag=="
@@ -3409,10 +3424,20 @@
   "resolved" "https://registry.npmjs.org/lodash.throttle/-/lodash.throttle-4.1.1.tgz"
   "version" "4.1.1"
 
+"lodash.trim@^4.5.1":
+  "integrity" "sha512-nJAlRl/K+eiOehWKDzoBVrSMhK0K3A3YQsUNXHQa5yIrKBAhsZgSu3KoAFoFT+mEgiyBHddZ0pRk1ITpIp90Wg=="
+  "resolved" "https://registry.npmjs.org/lodash.trim/-/lodash.trim-4.5.1.tgz"
+  "version" "4.5.1"
+
 "lodash.truncate@^4.4.2":
   "integrity" "sha512-jttmRe7bRse52OsWIMDLaXxWqRAmtIUccAQ3garviCqJjafXOfNMO0yMfNpdD6zbGaTU0P5Nz7e7gAT6cKmJRw=="
   "resolved" "https://registry.npmjs.org/lodash.truncate/-/lodash.truncate-4.4.2.tgz"
   "version" "4.4.2"
+
+"lodash.without@^4.4.0":
+  "integrity" "sha512-M3MefBwfDhgKgINVuBJCO1YR3+gf6s9HNJsIiZ/Ru77Ws6uTb9eBuvrkpzO+9iLoAaRodGuq7tyrPCx+74QYGQ=="
+  "resolved" "https://registry.npmjs.org/lodash.without/-/lodash.without-4.4.0.tgz"
+  "version" "4.4.0"
 
 "lodash@^4.17.21", "lodash@^4.17.4":
   "integrity" "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
@@ -3896,6 +3921,35 @@
   dependencies:
     "performance-now" "^2.1.0"
 
+"ranges-apply@^6.2.2":
+  "integrity" "sha512-ISCJw52YLx9m3EjhqlXwVc4pgwSUuMwWkzuYw8WqSExgYHu3ZA/oO6qh3RpPo2E91LiFdmQNF1fEuQUhDISfeQ=="
+  "resolved" "https://registry.npmjs.org/ranges-apply/-/ranges-apply-6.2.2.tgz"
+  "version" "6.2.2"
+  dependencies:
+    "ranges-merge" "^8.2.2"
+    "tiny-invariant" "^1.2.0"
+
+"ranges-merge@^8.2.2":
+  "integrity" "sha512-r/+zro+tukevOznmjflo68efwk931rY0FQFVzZjgI5DRA7pT0H+/qM6a0lx++TY/eHICfhlQ/56oGBSbx/8pRA=="
+  "resolved" "https://registry.npmjs.org/ranges-merge/-/ranges-merge-8.2.2.tgz"
+  "version" "8.2.2"
+  dependencies:
+    "ranges-push" "^6.2.2"
+    "ranges-sort" "^5.1.1"
+
+"ranges-push@^6.2.2":
+  "integrity" "sha512-cFDwZgQMW3SI7bDzl0cpGy9T997/d3VIyxDYZUVlYfY0z7GWqd3Lg4DAiFRnkOHDbAT94jlZVfyJ0HX+sKWnGw=="
+  "resolved" "https://registry.npmjs.org/ranges-push/-/ranges-push-6.2.2.tgz"
+  "version" "6.2.2"
+  dependencies:
+    "string-collapse-leading-whitespace" "^6.1.2"
+    "string-trim-spaces-only" "^4.1.1"
+
+"ranges-sort@^5.1.1":
+  "integrity" "sha512-xFK3wqdolNvZAwotY1m3CzvaWfYpA7ddOXnhuo2pYTNLXDIgW5oF9mnntCvgcmhGsISN6T7XiCJIR/UZVasZ+Q=="
+  "resolved" "https://registry.npmjs.org/ranges-sort/-/ranges-sort-5.1.1.tgz"
+  "version" "5.1.1"
+
 "rc@^1.2.7":
   "integrity" "sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw=="
   "resolved" "https://registry.npmjs.org/rc/-/rc-1.2.8.tgz"
@@ -4342,6 +4396,37 @@
   dependencies:
     "safe-buffer" "~5.1.0"
 
+"string-collapse-leading-whitespace@^6.1.2":
+  "integrity" "sha512-U8QOn9GXAVoERri4K7vqt7D8W6Lijmtsnn+clXLlxJWlA38MVDUjT4dbtR0Qw7FwfmJ6ixpRFC68nMUvstf7gA=="
+  "resolved" "https://registry.npmjs.org/string-collapse-leading-whitespace/-/string-collapse-leading-whitespace-6.1.2.tgz"
+  "version" "6.1.2"
+
+"string-left-right@^5.1.2":
+  "integrity" "sha512-KbrADvIlY+K2VWW8tnTnD2DQyFlFdnPne4rGdgPo0R19T+ulGah4vHCLuM1vcXoaw2moWXSrpkjM7SlSe6j9gw=="
+  "resolved" "https://registry.npmjs.org/string-left-right/-/string-left-right-5.1.2.tgz"
+  "version" "5.1.2"
+  dependencies:
+    "lodash.clonedeep" "^4.5.0"
+    "lodash.isplainobject" "^4.0.6"
+
+"string-strip-html@^11.6.6":
+  "integrity" "sha512-Q4NNO0Jr38MC8z5geMImwbzp81morjZbt1ZhI7JF83hjiwgqXBOh6pDXUg6C1WCMpm65YK6H5ZgBUWygVTudZA=="
+  "resolved" "https://registry.npmjs.org/string-strip-html/-/string-strip-html-11.6.6.tgz"
+  "version" "11.6.6"
+  dependencies:
+    "html-entities" "^2.3.3"
+    "lodash.isplainobject" "^4.0.6"
+    "lodash.trim" "^4.5.1"
+    "lodash.without" "^4.4.0"
+    "ranges-apply" "^6.2.2"
+    "ranges-push" "^6.2.2"
+    "string-left-right" "^5.1.2"
+
+"string-trim-spaces-only@^4.1.1":
+  "integrity" "sha512-cAuDSKWkObM+nNteIFQeRaQA7Jk0I79itI8l0+D6AuQ/uVl3uVZCLW+3kXYBNG0DBMJlmk3JUDfUcwEANsPnMA=="
+  "resolved" "https://registry.npmjs.org/string-trim-spaces-only/-/string-trim-spaces-only-4.1.1.tgz"
+  "version" "4.1.1"
+
 "string-width@^4.2.3":
   "integrity" "sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g=="
   "resolved" "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz"
@@ -4574,6 +4659,11 @@
   dependencies:
     "readable-stream" "~1.0.17"
     "xtend" "~2.1.1"
+
+"tiny-invariant@^1.2.0":
+  "integrity" "sha512-1Uhn/aqw5C6RI4KejVeTg6mIS7IqxnLJ8Mv2tV5rTc0qWobay7pDUz6Wi392Cnc8ak1H0F2cjoRzb2/AW4+Fvg=="
+  "resolved" "https://registry.npmjs.org/tiny-invariant/-/tiny-invariant-1.2.0.tgz"
+  "version" "1.2.0"
 
 "tiny-warning@^1.0.2":
   "integrity" "sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA=="

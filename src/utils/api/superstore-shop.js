@@ -110,6 +110,17 @@ const getFeaturedProductList = async () => {
   }
 };
 
+//done
+const getRelatedProductList = async (id) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/version1/products/related/${id}`);
+   // console.log(response)
+    return response.data?.data
+  } catch (error) {
+    return []
+  }
+};
+
 // done
 const getProductDetailsById = async (id) => {
   try {
@@ -209,6 +220,7 @@ export default {
   // getTopRatedBrand,
   getNewArrivalProductList,
   getFeaturedProductList,
+  getRelatedProductList,
   getCategoryProductList,
   // getCarBrands,
   // getCarList,
