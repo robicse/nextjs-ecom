@@ -48,12 +48,12 @@ const ProductDetails = (props) => {
       description: item?.description
     }
   }
-  const {productDetails, relatedProducts, shopList} = props
-  console.log('productDetails',productDetails)
+  const {productDetails, relatedProducts, reviewsProduct, shopList} = props
+  // console.log('productDetails',productDetails)
   const product = itemChange(productDetails);
-  console.log('product',product)
+  // console.log('product',product)
 
-  console.log('relatedProducts',relatedProducts)
+  console.log('reviewsProduct',reviewsProduct)
   // {
   //   price: 168,
   //   title: "Lord 2019",
@@ -110,7 +110,7 @@ const ProductDetails = (props) => {
 
         <Box mb={6}>
           {selectedOption === 0 && <ProductDescription product={product} />}
-          {selectedOption === 1 && <ProductReview />}
+          {selectedOption === 1 && <ProductReview reviewsProduct={reviewsProduct} />}
         </Box>
 
         {/* {frequentlyBought && (
@@ -146,10 +146,12 @@ export  const getStaticProps = async(context)=> {
   const productDetails = await api.getProductDetailsById(context.params.id)
   // const shopList = await vendorApi.getSellerList()
   const relatedProducts = await api.getRelatedProductList(context.params.id);
+  const reviewsProduct = await api.getReviewsProduct(context.params.id);
  return {
    props: {
     productDetails,
     relatedProducts,
+    reviewsProduct,
     // shopList
    }
  }

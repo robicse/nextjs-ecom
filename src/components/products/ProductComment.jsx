@@ -6,8 +6,11 @@ import { H5, H6, Paragraph, Span } from "components/Typography";
 import { getDateDifference } from "utils/utils"; // ===========================================================
 
 // ===========================================================
-const ProductComment = (props) => {
-  const { name, imgUrl, rating, date, comment } = props;
+const ProductComment = ({itemData}) => {
+  console.log('itemData',itemData);
+
+  const { name, imgUrl, rating, date, comment } = itemData;
+ 
   return (
     <Box mb={4} maxWidth="600px">
       <FlexBox alignItems="center" mb={2}>

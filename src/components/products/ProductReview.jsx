@@ -6,11 +6,14 @@ import { useFormik } from "formik";
 import React from "react";
 import * as yup from "yup";
 import ProductComment from "./ProductComment";
+const BASE_URL = process.env.BASE_URL
 
-const ProductReview = () => {
+const ProductReview = ({reviewsProduct}) => {
   const handleFormSubmit = async (values, { resetForm }) => {
     resetForm();
   };
+
+  console.log('reviewsProduct',reviewsProduct)
 
   const {
     dirty,
@@ -27,10 +30,21 @@ const ProductReview = () => {
     initialValues: initialValues,
     validationSchema: reviewSchema,
   });
+
+  const itemChange = (item)=>{
+    return{
+      name: item?.user?.name,
+      imgUrl: `${BASE_URL}/public/${item?.user?.image}`,
+      rating: item?.rating,
+      date: item?.time,
+      comment: item?.comment
+    }
+  }
+
   return (
     <Box>
-      {commentList.map((item, ind) => (
-        <ProductComment {...item} key={ind} />
+      {reviewsProduct.map((item, ind) => (
+        <ProductComment itemData={itemChange(item)} key={ind} />
       ))}
 
       <H2 fontWeight="600" mt={7} mb={2.5}>

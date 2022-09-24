@@ -15,7 +15,7 @@ import { FlexBox, FlexRowCenter } from "../flex-box"; // =======================
 
 // ================================================================
 const ProductIntro = ({ product }) => {
-  console.log('product1',product);
+  // console.log('product1',product);
   const { id, price, title, imgGroup, brand, rating } = product;
   const router = useRouter();
   const routerId = router.query.id;

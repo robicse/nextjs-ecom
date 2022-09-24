@@ -121,6 +121,17 @@ const getRelatedProductList = async (id) => {
   }
 };
 
+//done
+const getReviewsProduct = async (id) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/version1/reviews/product/${id}`);
+   // console.log(response)
+    return response.data?.data
+  } catch (error) {
+    return []
+  }
+};
+
 // done
 const getProductDetailsById = async (id) => {
   try {
@@ -222,6 +233,7 @@ export default {
   getFeaturedProductList,
   getRelatedProductList,
   getCategoryProductList,
+  getReviewsProduct,
   // getCarBrands,
   // getCarList,
   // getMobileBrands,
