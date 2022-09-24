@@ -12,7 +12,7 @@ import bazarReactDatabase from "data/bazar-react-database";
 import { useEffect, useState } from "react";
 import {
   getFrequentlyBought,
-  getRelatedProducts,
+  //getRelatedProducts,
 } from "utils/api/related-products";
 import api from "utils/api/superstore-shop";
 import vendorApi from "utils/api/vendor";
@@ -48,10 +48,12 @@ const ProductDetails = (props) => {
       description: item?.description
     }
   }
-  const {productDetails, shopList} = props
+  const {productDetails, relatedProducts, shopList} = props
   console.log('productDetails',productDetails)
   const product = itemChange(productDetails);
   console.log('product',product)
+
+  console.log('relatedProducts',relatedProducts)
   // {
   //   price: 168,
   //   title: "Lord 2019",
@@ -69,7 +71,7 @@ const ProductDetails = (props) => {
   // },
   // const [product, setProduct] = useState(bazarReactDatabase[0]);
   const [selectedOption, setSelectedOption] = useState(0);
-  const [relatedProducts, setRelatedProducts] = useState([]);
+  // const [relatedProducts, setRelatedProducts] = useState([]);
   const [frequentlyBought, setFrequentlyBought] = useState([]);
   /**
    * Note:
@@ -81,7 +83,7 @@ const ProductDetails = (props) => {
    */
 
   useEffect(() => {
-    getRelatedProducts().then((data) => setRelatedProducts(data));
+    // getRelatedProducts().then((data) => setRelatedProducts(data));
     getFrequentlyBought().then((data) => setFrequentlyBought(data));
   }, []);
 
@@ -143,9 +145,11 @@ export  const getStaticPaths = async()=> {
 export  const getStaticProps = async(context)=> {
   const productDetails = await api.getProductDetailsById(context.params.id)
   // const shopList = await vendorApi.getSellerList()
+  const relatedProducts = await api.getRelatedProductList(context.params.id);
  return {
    props: {
     productDetails,
+    relatedProducts,
     // shopList
    }
  }

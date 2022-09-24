@@ -58,18 +58,18 @@ const ContentWrapper = styled(Box)(() => ({
 
 // ========================================================
 const ProductCard1 = ({
-  id,
-  title,
-  price,
-  imgUrl,
-  rating = 5,
-  hideRating,
-  hoverEffect,
-  discount = 5,
-  showProductSize,
+ itemdata
 }) => {
 
-  
+  const { id,
+    title,
+    price,
+    imgUrl,
+    rating = 5,
+    hideRating,
+    hoverEffect,
+    discount = 5,
+    showProductSize,} = itemdata;
   const { state, dispatch } = useAppContext();
   const { token, user, wishList, addNewWishList, removefromWishList } = useAuth();
   const [isFavorite, setIsFavorite] = useState(false);
