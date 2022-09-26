@@ -122,7 +122,7 @@ const sellerResistration = async (values) => {
 const getAllWishList = async () => {
   try {
     //const result =  await api.getCustomerProfile()
-    const res=  await Axios.get(`https://bme.com.bd/api/v1/wishlists`,config)
+    const res=  await Axios.get(`https://bme.com.bd/api/version1/wishlists`,config)
     console.log(res?.data?.data,'124')
     if(!!res?.data?.data.length){
       //  console.log(first)
@@ -139,7 +139,7 @@ const getAllWishList = async () => {
 const addNewWishList = async (productId) => {
   try {
     //const result =  await api.getCustomerProfile()
-    const res=  await Axios.post(`https://bme.com.bd/api/v1/wishlists`,{product_id:productId},config)
+    const res=  await Axios.post(`https://bme.com.bd/api/version1/wishlists`,{product_id:productId},config)
     // console.log(res.data?.response?.data)
     dispatch({ type: 'SET_ALL_WISH_LIST', payload: res.data?.response?.data});
     cogoToast.success(`${res.data?.message}`, { position: 'top-right', bar: { size: '10px' } });
@@ -152,7 +152,7 @@ const addNewWishList = async (productId) => {
 const removefromWishList = async (wishListId) => {
   try {
     //const result =  await api.getCustomerProfile()
-    const res=  await Axios.delete(`https://bme.com.bd/api/v1/wishlists/${wishListId}`,config)
+    const res=  await Axios.delete(`https://bme.com.bd/api/version1/wishlists/${wishListId}`,config)
     dispatch({ type: 'SET_ALL_WISH_LIST', payload: res.data?.response?.data});
     cogoToast.success(`${res.data?.message}`, { position: 'top-right', bar: { size: '10px' } });
   } catch (err) {

@@ -89,6 +89,17 @@ const getTopRatedBrand = async () => {
 };
 
 //done
+const getAllProductList = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/version1/products/all`);
+   // console.log(response)
+    return response.data?.data
+  } catch (error) {
+    return []
+  }
+};
+
+//done
 const getNewArrivalProductList = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/api/version1/products/new-arrival`);
@@ -229,6 +240,7 @@ export default {
   // getBigDiscountList,
   // getTopRatedProduct,
   // getTopRatedBrand,
+  getAllProductList,
   getNewArrivalProductList,
   getFeaturedProductList,
   getRelatedProductList,
