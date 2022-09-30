@@ -18,6 +18,7 @@ const MiniCart = ({ toggleSidenav }) => {
   const { palette } = useTheme();
   const { state, dispatch } = useAppContext();
   const cartList = state.cart;
+  console.log('carList mini cart',cartList)
   const handleCartAmountChange = useCallback(
     (amount, product) => () => {
       dispatch({
@@ -139,7 +140,7 @@ const MiniCart = ({ toggleSidenav }) => {
               </Link>
 
               <Tiny color="grey.600">
-                ${item.price.toFixed(2)} x {item.qty}
+              ৳{item.price.toFixed(2)} x {item.qty}
               </Tiny>
 
               <Box
@@ -148,7 +149,7 @@ const MiniCart = ({ toggleSidenav }) => {
                 color="primary.main"
                 mt={0.5}
               >
-                ${(item.qty * item.price).toFixed(2)}
+                ৳{(item.qty * item.price).toFixed(2)}
               </Box>
             </Box>
 
@@ -176,7 +177,7 @@ const MiniCart = ({ toggleSidenav }) => {
               }}
               onClick={toggleSidenav}
             >
-              Checkout Now (${getTotalPrice().toFixed(2)})
+              Checkout Now11 (${getTotalPrice().toFixed(2)})
             </BazarButton>
           </Link>
 

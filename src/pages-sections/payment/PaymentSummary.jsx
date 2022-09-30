@@ -3,14 +3,21 @@ import Card1 from "components/Card1";
 import { FlexBetween } from "components/flex-box";
 import { Paragraph } from "components/Typography";
 import React from "react";
+import { useAppContext } from "../checkout/../../contexts/AppContext";
 
 const PaymentSummary = () => {
+  const { state } = useAppContext();
+  const cartList = state.cart;
+  console.log('carList mini cart 3',cartList)
+  const getTotalPrice = () => {
+    return cartList.reduce((accum, item) => accum + item.price * item.qty, 0);
+  };
   return (
     <Card1>
       <FlexBetween mb={1}>
         <Paragraph color="grey.600">Subtotal:</Paragraph>
         <Paragraph fontSize={18} fontWeight={600} lineHeight={1}>
-          $2610
+        ৳{getTotalPrice().toFixed(2)}
         </Paragraph>
       </FlexBetween>
 
@@ -47,7 +54,7 @@ const PaymentSummary = () => {
         lineHeight={1}
         textAlign="right"
       >
-        $2610.00
+       ৳{getTotalPrice().toFixed(2)}
       </Paragraph>
     </Card1>
   );

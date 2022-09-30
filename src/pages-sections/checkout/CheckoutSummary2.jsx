@@ -1,9 +1,16 @@
 import { Box, Divider } from "@mui/material";
 import { FlexBetween } from "components/flex-box";
 import { Paragraph, Span } from "components/Typography";
+import { useAppContext } from "contexts/AppContext";
 import React from "react";
 
 const CheckoutSummary2 = () => {
+  const { state } = useAppContext();
+  const cartList = state.cart;
+  console.log('carList mini cart 2',cartList)
+  const getTotalPrice = () => {
+    return cartList.reduce((accum, item) => accum + item.price * item.qty, 0);
+  };
   return (
     <Box>
       <Paragraph color="secondary.900" fontWeight={700} mb={2}>
@@ -31,7 +38,7 @@ const CheckoutSummary2 = () => {
 
       <FlexBetween mb={0.5}>
         <Paragraph color="grey.600">Subtotal:</Paragraph>
-        <Paragraph fontWeight="700">${(2610).toFixed(2)}</Paragraph>
+        <Paragraph fontWeight="700">${getTotalPrice().toFixed(2)}</Paragraph>
       </FlexBetween>
 
       <FlexBetween mb={0.5}>
@@ -58,7 +65,7 @@ const CheckoutSummary2 = () => {
 
       <FlexBetween fontWeight="700" mb={1}>
         <Paragraph>Total:</Paragraph>
-        <Paragraph fontWeight="700">${(2610).toFixed(2)}</Paragraph>
+        <Paragraph fontWeight="700">${getTotalPrice().toFixed(2)}</Paragraph>
       </FlexBetween>
     </Box>
   );
