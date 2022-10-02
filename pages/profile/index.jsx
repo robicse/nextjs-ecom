@@ -66,7 +66,7 @@ const Profile = ({generalSetting}) => {
               }}
               
             >
-              Edit Profile
+              Edit Profile1
             </Button>
           </Link>
         }

@@ -53,39 +53,40 @@ export const Wrapper = styled(({ children, passwordVisibility, ...rest }) => (
 
 const Login = () => {
   const {logout, isAuthenticated, login} = useAuth()
-  console.log(isAuthenticated, login)
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility((visible) => !visible);
   }, []);
 
-  // const [defaulLoginUser, setDefaulLoginUser] = useState(null)
+// const [defaulLoginUser, setDefaulLoginUser] = useState(null)
 
-const initialValues = {phone: '', password: ''}
+const initialValues = {email: '', password: ''}
 
 const handleDefaulLogin = (type, setFieldValue) =>{
   console.log(type)
   if(type === 'seller'){
-    setFieldValue('phone','seller1@gmail.com')
+    setFieldValue('email','01774628268')
     setFieldValue('password','123456')
   }
   if(type === 'customer'){
-    setFieldValue('phone','emon@gmail.com')
+    setFieldValue('email','01725930131')
     setFieldValue('password','123456')
   }
   if(type === 'default'){
-    setFieldValue('phone','')
+    setFieldValue('email','')
     setFieldValue('password','')
   }
 }
 // console.log(initialValues, 'df')
 const formSchema = yup.object().shape({
   password: yup.string().required("Password is required"),
-  phone: yup.string().required("Phone is required"),
+  email: yup.string().required("email is required"),
 });
 
   const handleFormSubmit = async (values) => {
-    const result = await login({...values, email: values.phone})
+    console.log('come heare')
+    const result = await login({...values, email: values.email})
+    console.log('login',result)
     if(result && result?.user.type == 'customer'){
       Router.push('/profile')
     }
@@ -113,23 +114,23 @@ const formSchema = yup.object().shape({
           color="grey.800"
           textAlign="center"
         >
-          Log in with phone & password
+          Log in with email & password
         </Small>
 
         <BazarTextField
           mb={1.5}
           fullWidth
-          name="phone"
+          name="email"
           size="small"
           type="text"
           variant="outlined"
           onBlur={handleBlur}
-          value={values.phone}
+          value={values.email}
           onChange={handleChange}
-          label="Phone Number"
+          label="email Number"
           placeholder="123*******"
-          error={!!touched.phone && !!errors.phone}
-          helperText={touched.phone && errors.phone}
+          error={!!touched.email && !!errors.email}
+          helperText={touched.email && errors.email}
         />
 
         <BazarTextField
@@ -170,32 +171,22 @@ const formSchema = yup.object().shape({
           Login
         </BazarButton>
       </form>
-
       <FormControl>
-        <FormLabel id="demo-row-radio-buttons-group-label">Demo login as a</FormLabel>
-        <RadioGroup
-          row
-          aria-labelledby="demo-row-radio-buttons-group-label"
-          name="row-radio-buttons-group"
-          onChange={(e)=>handleDefaulLogin(e.target.value,setFieldValue)}
-        >
-          <FormControlLabel value="default" control={<Radio />} label="Default" />
-          <FormControlLabel value="customer" control={<Radio />} label="Customer" />
-          <FormControlLabel value="seller" control={<Radio />} label="Seller" />
-        </RadioGroup>
-      </FormControl>
-
+      <FormLabel id="demo-row-radio-buttons-group-label">Demo login as a</FormLabel>
+      <RadioGroup
+        row
+        aria-labelledby="demo-row-radio-buttons-group-label"
+        name="row-radio-buttons-group"
+        onChange={(e)=>handleDefaulLogin(e.target.value,setFieldValue)}
+      >
+        <FormControlLabel value="default" control={<Radio />} label="Default" />
+        <FormControlLabel value="customer" control={<Radio />} label="Customer" />
+        <FormControlLabel value="seller" control={<Radio />} label="Seller" />
+      </RadioGroup>
+    </FormControl>
       <SocialButtons redirect="/signup" redirectText="Sign Up" />
     </Wrapper>
   );
 };
 
-const initialValues = {
-  phone: "",
-  password: "",
-};
-const formSchema = yup.object().shape({
-  password: yup.string().required("Password is required"),
-  phone: yup.string().required("Phone is required"),
-});
 export default Login;
