@@ -316,7 +316,7 @@ const AuthProvider = ({ children }) => {
         `${BASE_URL}/api/version1/user/shipping/address`,
         config
       );
-      return res.data.data;
+      return res?.data;
     } catch (err) {
       console.log(err);
     }

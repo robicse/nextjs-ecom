@@ -13,33 +13,31 @@ import {
 
   const checkoutSchema = yup.object({
     address: yup.string().required("required"),
-    country: yup.string().required("required"),
+    // country: yup.string().required("required"),
     city: yup.string().required("required"),
     postal_code: yup.number().required("required"),
     phone: yup.string().required("required"),
   });
 
   const initialValues = {
-    address: "UI Lib",
-    country: "Bangladesh",
-    city: "Sylhet",
-    country: "Bangladesh",
-    postal_code: 4336,
-    phone: "01789123456",
+    address: "",
+    city: "",
+    postal_code: "",
+    phone: "",
   }; // ==================================================================
   
   // ==================================================================
-  const NewAddressForm = () => {
+  const NewAddressForm = ({addAddressHanle}) => {
     
     const { handleChange, handleSubmit, errors, touched, values } = useFormik({
       initialValues: initialValues,
       validationSchema: checkoutSchema,
       onSubmit: (values, { resetForm }) => {
           console.log(values)
-        // if (values) {
-          
-        //   resetForm(initialValues);
-        // }
+        if (values) {
+          addAddressHanle(values)
+          resetForm(initialValues);
+        }
       },
     });
     return (
@@ -59,7 +57,7 @@ import {
                     error={touched.address && Boolean(errors.address)}
                   />
                 </Grid>
-                <Grid item sm={6} xs={12}>
+                {/* <Grid item sm={6} xs={12}>
                   <TextField
                     fullWidth
                     name="country"
@@ -69,7 +67,7 @@ import {
                     helperText={touched.country && errors.country}
                     error={touched.country && Boolean(errors.country)}
                   />
-                </Grid>
+                </Grid> */}
                 <Grid item sm={6} xs={12}>
                   <TextField
                     fullWidth
@@ -88,13 +86,13 @@ import {
                 <Grid item sm={6} xs={12}>
                   <TextField
                     fullWidth
-                    name="zip"
-                    label="Zip"
+                    name="postal_code"
+                    label="Postal Code"
                     type="number"
-                    value={values.zip}
+                    value={values.postal_code}
                     onChange={handleChange}
-                    helperText={touched.zip && errors.zip}
-                    error={touched.zip && Boolean(errors.zip)}
+                    helperText={touched.zip && errors.postal_code}
+                    error={touched.postal_code && Boolean(errors.postal_code)}
                   />
                 </Grid>
   

@@ -15,10 +15,10 @@ import shopApi from "utils/api/superstore-shop";
 import { useState, useEffect } from "react";
  
 const Profile = ({generalSetting}) => {
-
+console.log(generalSetting )
   const { user, getCustomerDashboard}  = useAuth();
   
-  console.log('getCustomerDashboard',getCustomerDashboard);
+  console.log(user);
   
   const [customerDashboard, setCustomerDashboard] = useState({});
   const [editAddressfromOpen, setEditAddressfromOpen] = useState(false)
@@ -30,24 +30,22 @@ const Profile = ({generalSetting}) => {
   }
 
 
-  const editAddressSubmitHandle = async(value)=>{
-    const res = await updateCustomerProfile(value);
-    if(res){
-      await getCustomerProfileFetch()
-      handleEditAddressForm(null)
-    }
-  }
+  // const editAddressSubmitHandle = async(value)=>{
+  //   const res = await updateCustomerProfile(value);
+  //   if(res){
+  //     await getCustomerProfileFetch()
+  //     handleEditAddressForm(null)
+  //   }
+  // }
 
   const getCustomerDashboardFetch = async()=>{
     const res = await getCustomerDashboard();
-    setCustomerDashboard(res?.response);
+    setCustomerDashboard(res.response);
   };
 
-  console.log('customerDashboard', customerDashboard)
-
-  useEffect(()=>{
-    getCustomerDashboardFetch();
-  },[])
+    useEffect(()=>{
+      getCustomerDashboardFetch();
+    },[])
 
 
   return (
@@ -66,7 +64,7 @@ const Profile = ({generalSetting}) => {
               }}
               
             >
-              Edit Profile1
+              Edit Profile
             </Button>
           </Link>
         }
@@ -84,7 +82,7 @@ const Profile = ({generalSetting}) => {
               }}
             >
               <Avatar
-               src={imageUrlFormat(user?.avatar)}
+               src={imageUrlFormat(user?.avatar_original)}
               
                 // src="/assets/images/faces/ralph.png"
                 sx={{
@@ -100,7 +98,7 @@ const Profile = ({generalSetting}) => {
                     <FlexBox alignItems="center">
                       <Typography color="grey.600">Balance:</Typography>
                       <Typography ml={0.5} color="primary.main">
-                      {/* ৳{user?.balance} */}
+                       ৳{customerDashboard?.balance}
                       </Typography>
                     </FlexBox>
                   </div>
@@ -113,7 +111,7 @@ const Profile = ({generalSetting}) => {
           <Grid item md={6} xs={12}>
             <Grid container spacing={4}>
               
-                <Grid item lg={3} sm={6} xs={6}>
+                {/* <Grid item lg={3} sm={6} xs={6}>
                   <Card
                     sx={{
                       height: "100%",
@@ -131,9 +129,9 @@ const Profile = ({generalSetting}) => {
                     cart product
                     </Small>
                   </Card>
-                </Grid>
+                </Grid> */}
 
-                <Grid item lg={3} sm={6} xs={6} >
+                <Grid item lg={6} sm={6} xs={6} >
                   <Card
                     sx={{
                       height: "100%",
@@ -153,7 +151,7 @@ const Profile = ({generalSetting}) => {
                   </Card>
                 </Grid>
 
-                <Grid item lg={3} sm={6} xs={6} >
+                <Grid item lg={6} sm={6} xs={6} >
                   <Card
                     sx={{
                       height: "100%",
@@ -192,12 +190,12 @@ const Profile = ({generalSetting}) => {
 
       
 
-        <FlexBox flexDirection="column" p={1}>
+        {/* <FlexBox flexDirection="column" p={1}>
           <Small color="grey.600" mb={0.5} textAlign="left">
             Email
           </Small>
           <span>{user?.email}</span>
-        </FlexBox>
+        </FlexBox> */}
 
         <FlexBox flexDirection="column" p={1}>
           <Small color="grey.600" mb={0.5} textAlign="left">
@@ -205,31 +203,19 @@ const Profile = ({generalSetting}) => {
           </Small>
           <span>{user?.phone}</span>
         </FlexBox>
+
+        <FlexBox flexDirection="column" p={1}>
+          <Small color="grey.600" mb={0.5} textAlign="left">
+            Join At
+          </Small>
+          <span> {user?.created_at}</span>
+        </FlexBox>
       </TableRow>
 
       
     </CustomerDashboardLayout>
   );
 };
-
-const infoList = [
-  {
-    title: "16",
-    subtitle: "All Orders",
-  },
-  {
-    title: "02",
-    subtitle: "Awaiting Payments",
-  },
-  {
-    title: "00",
-    subtitle: "Awaiting Shipment",
-  },
-  {
-    title: "01",
-    subtitle: "Awaiting Delivery",
-  },
-];
 
 export async function getStaticProps() {
   const generalSetting = await shopApi.generalSetting();
@@ -240,5 +226,4 @@ export async function getStaticProps() {
     },
   };
 }
-
 export default Profile;
