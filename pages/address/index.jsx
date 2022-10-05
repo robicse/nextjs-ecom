@@ -50,11 +50,11 @@ const AddressList = ({ generalSetting }) => {
       await getAllHandleFetch();
     }
   };
-
-  const getAllHandleFetch = async () => {
-    const res = await getAllAddress();
-    console.log(res);
-    setAddressList(res);
+  const getAllHandleFetch = async (p) => {
+    const data = await getAllAddress(p);
+    if(data){
+      setAddressList(data);
+    }
   };
 
   const addAddressHanle = async (value) => {
@@ -127,7 +127,8 @@ const AddressList = ({ generalSetting }) => {
           Postal Code
         </Typography>
       </TableRow>
-      {addressList.map((item, ind) => (
+      {addressList?.data?.map((item, ind) => (
+      // {addressList.map((item, ind) => (
         <TableRow
           sx={{
             my: 2,

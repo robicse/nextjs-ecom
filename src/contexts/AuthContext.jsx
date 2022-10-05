@@ -310,16 +310,19 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  const getAllAddress = async () => {
-    try {
+  const getAllAddress = async (p) => {
+    // try {
       const res = await Axios.get(
-        `${BASE_URL}/api/version1/user/shipping/address`,
+        `https://bme.com.bd/api/version1/user/shipping/address`,
         config
       );
       return res?.data;
-    } catch (err) {
-      console.log(err);
-    }
+      // if (!!res?.data?.data.length) {
+      //   dispatch({ type: "SET_ALL_WISH_LIST", payload: res?.data?.data });
+      // }
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   const addAddress = async (value) => {
@@ -448,7 +451,8 @@ const AuthProvider = ({ children }) => {
   const getCustomerPurchaseHistory = async (p) => {
     try {
       const response = await Axios.get(
-        `${BASE_URL}/api/version1/purchase-history?page=${p}`,
+        //`${BASE_URL}/api/version1/purchase-history?page=${p}`,
+        `${BASE_URL}/api/version1/purchase-history`,
         config
       );
       return response?.data;

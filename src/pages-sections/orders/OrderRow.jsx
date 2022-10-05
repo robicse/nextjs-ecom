@@ -27,7 +27,7 @@ const OrderRow = ({ item }) => {
   };
 
   return (
-    <Link href={item.href}>
+     <Link href="">
       <a>
         <TableRow
           sx={{
@@ -36,30 +36,30 @@ const OrderRow = ({ item }) => {
           }}
         >
           <H5 m={0.75} textAlign="left">
-            {item.orderNo}
+            {item.code}
           </H5>
           <Box m={0.75}>
             <Chip
               size="small"
-              label={item.status}
+              label={item.payment_status}
               sx={{
                 p: "0.25rem 0.5rem",
                 fontSize: 12,
-                color: !!getColor(item.status)
-                  ? `${getColor(item.status)}.900`
+                color: !!getColor(item.payment_status)
+                  ? `${getColor(item.payment_status)}.900`
                   : "inherit",
-                backgroundColor: !!getColor(item.status)
-                  ? `${getColor(item.status)}.100`
+                backgroundColor: !!getColor(item.payment_status)
+                  ? `${getColor(item.payment_status)}.100`
                   : "none",
               }}
             />
           </Box>
           <Typography className="pre" m={0.75} textAlign="left">
-            {format(new Date(item.purchaseDate), "MMM dd, yyyy")}
+            {item.date}
           </Typography>
 
           <Typography m={0.75} textAlign="left">
-            ${item.price.toFixed(2)}
+          ৳{item.subtotal}
           </Typography>
 
           <Typography
