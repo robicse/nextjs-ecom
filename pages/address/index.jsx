@@ -66,8 +66,9 @@ const AddressList = ({ generalSetting }) => {
   };
 
   const editAddressSubmitHandle = async (value) => {
-    const res = await updateAddress(value);
-    if (res) {
+    console.log('value1', value)
+    const res2 = await updateAddress(value);
+    if (res2) {
       await getAllHandleFetch();
       handleEditAddressForm(null);
     }

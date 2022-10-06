@@ -19,22 +19,31 @@ import useAuth from "hooks/useAuth";
 const ProfileEditor = () => {
   const { user, token, updateCustomerProfile } = useAuth();
   // console.log(user?.name)
-  const handleFormSubmit = async (values) => {
-    updateCustomerProfilevalues(values,token);
+  // const handleFormSubmit = async (values) => {
+  //   updateCustomerProfilevalues(values,token);
+  // };
+  const handleFormSubmit = async (value) => {
+    console.log('value1', value)
+    const res2 = await updateCustomerProfile(value);
+    // if (res2) {
+    //   await getAllHandleFetch();
+    //   handleEditAddressForm(null);
+    // }
   };
+
   const initialValues = {
     first_name: user?.name,
     last_name: user?.name,
     email: user?.email,
-    contact: user?.phone,
-    birth_date: new Date(user?.created_at),
+    phone: user?.phone,
+    // birth_date: new Date(user?.created_at),
   };
   const checkoutSchema = yup.object().shape({
     first_name: yup.string().required("required"),
     last_name: yup.string().required("required"),
     email: yup.string().email("invalid email").required("required"),
-    contact: yup.string().required("required"),
-    birth_date: yup.date().required("invalid date"),
+    phone: yup.string().required("required"),
+    // birth_date: yup.date().required("invalid date"),
   });
   return (
     <CustomerDashboardLayout>
@@ -97,12 +106,13 @@ const ProfileEditor = () => {
         <Formik
            enableReinitialize
           initialValues={{
+            id: user?.id,
             name: user?.name || 'gsdg',
             email: user?.email,
-            contact: user?.phone,
-            birth_date: new Date(user?.created_at),
+            phone: user?.phone,
+            // birth_date: new Date(user?.created_at),
             password: "",
-            confirmPassword: ""
+            confirm_password: ""
           }}
           // validationSchema={checkoutSchema}
           onSubmit={handleFormSubmit}
@@ -148,15 +158,15 @@ const ProfileEditor = () => {
                     <TextField
                       fullWidth
                       label="Phone"
-                      name="contact"
+                      name="phone"
                       onBlur={handleBlur}
-                      value={values.contact}
+                      value={values.phone}
                       onChange={handleChange}
-                      error={!!touched.contact && !!errors.contact}
-                      helperText={touched.contact && errors.contact}
+                      error={!!touched.phone && !!errors.phone}
+                      helperText={touched.phone && errors.phone}
                     />
                   </Grid>
-                  <Grid item md={6} xs={12}>
+                  {/* <Grid item md={6} xs={12}>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                       <DateTimePicker
                         label="Join Date"
@@ -182,7 +192,7 @@ const ProfileEditor = () => {
                         }
                       />
                     </LocalizationProvider>
-                  </Grid>
+                  </Grid> */}
                   <Grid item md={6} xs={12}>
                     <TextField
                       fullWidth
@@ -199,12 +209,12 @@ const ProfileEditor = () => {
                     <TextField
                       fullWidth
                       label="Confirm Password"
-                      name="confirmPassword"
+                      name="confirm_password"
                       onBlur={handleBlur}
-                      value={values.confirmPassword}
+                      value={values.confirm_password}
                       onChange={handleChange}
-                      error={!!touched.confirmPassword && !!errors.confirmPassword}
-                      helperText={touched.confirmPassword && errors.confirmPassword}
+                      error={!!touched.confirm_password && !!errors.confirm_password}
+                      helperText={touched.confirm_password && errors.confirm_password}
                     />
                   </Grid>
                 </Grid>

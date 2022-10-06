@@ -61,7 +61,10 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const config = {
-    headers: { Authorization: `Bearer ${state.token}` },
+    headers: { 
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${state.token}` 
+    },
   };
   useEffect(() => {
     if (state.token) {
@@ -348,22 +351,12 @@ const AuthProvider = ({ children }) => {
 
   const updateAddress = async (value) => {
     try {
-      const res = await Axios.put(
-        `${BASE_URL}/api/version1/user/shipping/edit/${value.id}`,
-        value,
-        config
-      );
-      cogoToast.success(`${res.data?.message}`, {
-        position: "top-right",
-        bar: { size: "10px" },
-      });
-      return true;
+      const res=  await Axios.put(`${BASE_URL}/api/version1/user/shipping/edit/${value.id}`,value,config)
+      cogoToast.success(`${res.data?.message}`, { position: 'top-right', bar: { size: '10px' } });
+      return true
     } catch (err) {
-      cogoToast.error(`Server Error`, {
-        position: "top-right",
-        bar: { size: "10px" },
-      });
-      return false;
+      cogoToast.error(`Server Error`, { position: 'top-right', bar: { size: '10px' } });
+      return false
     }
   };
   const deleteAddress = async (id) => {
@@ -399,32 +392,44 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  const updateCustomerProfile = async (data) => {
-    const FormatConfig = {
-      headers: {
-        Authorization: `Bearer ${state.token}`,
-        "Content-Type": "multipart/form-data",
-      },
-    };
+  // const updateCustomerProfile = async (data) => {
+  //   const FormatConfig = {
+  //     headers: {
+  //       Authorization: `Bearer ${state.token}`,
+  //       "Content-Type": "multipart/form-data",
+  //     },
+  //   };
+  //   try {
+  //     const res = await Axios.put(
+  //       `${BASE_URL}/api/version1/customer-profile/update`,
+  //       data,
+  //       config
+  //     );
+  //     dispatch({ type: "SET_CUSTOMER_PROFILE", payload: res?.data?.response });
+  //     cogoToast.success(`${res?.data?.msg}`, {
+  //       position: "top-right",
+  //       bar: { size: "10px" },
+  //     });
+  //     console.log(res);
+  //     return true;
+  //   } catch (error) {
+  //     cogoToast.error(`${res?.data?.response}`, {
+  //       position: "top-right",
+  //       bar: { size: "10px" },
+  //     });
+  //     return false;
+  //   }
+  // };
+
+  const updateCustomerProfile = async (value) => {
     try {
-      const res = await Axios.post(
-        `${BASE_URL}/api/version1/customer-profile/update`,
-        data,
-        config
-      );
+      const res=  await Axios.put(`${BASE_URL}/api/version1/customer-profile/update/${value.id}`,value,config)
       dispatch({ type: "SET_CUSTOMER_PROFILE", payload: res?.data?.response });
-      cogoToast.success(`${res?.data?.msg}`, {
-        position: "top-right",
-        bar: { size: "10px" },
-      });
-      console.log(res);
-      return true;
-    } catch (error) {
-      cogoToast.error(`${res?.data?.response}`, {
-        position: "top-right",
-        bar: { size: "10px" },
-      });
-      return false;
+      cogoToast.success(`${res.data?.msg}`, { position: 'top-right', bar: { size: '10px' } });
+      return true
+    } catch (err) {
+      cogoToast.error(`Server Error`, { position: 'top-right', bar: { size: '10px' } });
+      return false
     }
   };
 
