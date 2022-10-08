@@ -4,191 +4,190 @@ import Card1 from "components/Card1";
 import { FlexBox } from "components/flex-box";
 import { Paragraph } from "components/Typography";
 import { Formik } from "formik";
+// import { useFormik } from "formik";
 import useWindowSize from "hooks/useWindowSize";
+import useAuth from "../../hooks/useAuth";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
 import * as yup from "yup";
+import axios from "axios";
+//import swal from 'sweetalert';
+import { useHistory } from 'react-router-dom';
+import { useAppContext } from "../checkout/../../contexts/AppContext";
+import cogoToast from "cogo-toast";
 
 const PaymentForm = () => {
-  const [paymentMethod, setPaymentMethod] = useState("credit-card");
+  const { user, orderPlace } = useAuth();
+  const { state } = useAppContext();
+  console.log('user details', user);
+  const cartList = state.cart;
+  console.log('carList mini cart 4',cartList)
+  const getTotalPrice = () => {
+    return cartList.reduce((accum, item) => accum + item.price * item.qty, 0);
+  };
+
+  // const { handleChange, handleSubmit, errors, touched, values } = useFormik({
+  //   initialValues: initialValues,
+  //   validationSchema: checkoutSchema,
+  //   onSubmit: (values) => {
+  //     console.log('sdfsfd',values)
+  //     if (values) {
+  //       console.log('ggg')
+  //     }
+  //   },
+  // });
+
+  const [paymentMethod, setPaymentMethod] = useState("cod");
   const width = useWindowSize();
   const router = useRouter();
   const isMobile = width < 769;
 
-  const handleFormSubmit = async (values) => {
-    router.push("/payment");
-  };
+  // console.log('11')
+  // const handleFormSubmit = (e) => {
+  //   console.log('value1', 'kk')
+    //const res2 = await updateCustomerProfile(value);
+    // if (res2) {
+    //   await getAllHandleFetch();
+    //   handleEditAddressForm(null);
+    // }
+  // };
+  // console.log('22')
 
   const handlePaymentMethodChange = ({ target: { name } }) => {
     setPaymentMethod(name);
   };
 
+  
+  // const handleSubmit =  () => {
+  //   console.log('aaa');
+    // const res = await orderPlace(values);
+    // if (res) {
+    //   console.log('1',res)
+    // }else{
+    //   console.log('2')
+    // }
+  // };
+
+
+
+
+
+  //const history = useHistory();
+  // if(!localStorage.getItem('auth_token')){
+  //     history.push('/');
+  //     swal("Warning","Login to goto Cart Page","error");
+  // }
+  
+  const [loading, setLoading] = useState(true);
+  // const { cartList } = useAuth();
+  // var totalCartPrice = 0;
+
+//   useEffect(() => {
+
+//     let isMounted = true;
+
+//     axios.get(`/api/cart`).then(res=>{
+//         if(isMounted)
+//         {
+//             if(res.data.status === 200)
+//             {
+//                 setCart(res.data.cart);
+//                 setLoading(false);
+//             }
+//             else if(res.data.status === 401)
+//             {
+//                 history.push('/');
+//                 swal("Warning",res.data.message,"error");
+//             }
+//         }
+//     }); 
+
+//     return () => {
+//         isMounted = false
+//     };
+// }, [history]);
+
+
+  const config = {
+    headers: { 
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${state.token}` 
+    },
+  };
+
+  const submitOrder = (e, payment_mode) => {
+    e.preventDefault();
+    console.log('ddd');
+
+  //   const shipping_address = {
+  //     name: "Test",
+  //     phone: "01700000000",
+  //     email: "test@gmail.com",
+  //     address: "Mirpur",
+  //     country:"Bangladesh",
+  //     city: "Dhaka",
+  //     state: "Dhaka",
+  //     postal_code: "5300",
+  //     checkout_type:"logged",
+  //     payment_mode: "cod",
+  // };
+
+
+    var data = {
+        user_id: user.id,
+        getTotalPrice: getTotalPrice(),
+        cartData: cartList,
+        //shipping_address: shipping_address,
+        shipping_address_id: 1,
+    }
+
+    switch (payment_mode) {
+        case 'cod':
+            axios.post(`https://bme.com.bd/api/version1/order/store`, 
+            data,
+            config
+            ).then(res=>{
+                if(res.data.status === 200)
+                {
+                  cogoToast.success(`${res.data?.msg}`, { position: 'top-right', bar: { size: '10px' } });
+                  history.push('/order');
+                }
+                else
+                {
+                  cogoToast.error(`${res?.data?.response}`, {
+                    position: "top-right",
+                    bar: { size: "10px" },
+                  });
+                  return false;
+                }
+            });
+            break;
+    
+        default:
+            break;
+    }
+   
+}
+
+
+
+
+
+
+
+
+
+
   return (
     <Fragment>
+
       <Card1
         sx={{
           mb: 4,
         }}
       >
-        <FormControlLabel
-          sx={{
-            mb: 3,
-          }}
-          name="credit-card"
-          onChange={handlePaymentMethodChange}
-          label={<Paragraph fontWeight={600}>Pay with credit card</Paragraph>}
-          control={
-            <Radio
-              checked={paymentMethod === "credit-card"}
-              color="primary"
-              size="small"
-            />
-          }
-        />
-
-        <Divider
-          sx={{
-            mb: 3,
-            mx: -4,
-          }}
-        />
-
-        {paymentMethod === "credit-card" && (
-          <Formik
-            onSubmit={handleFormSubmit}
-            initialValues={initialValues}
-            validationSchema={checkoutSchema}
-          >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-            }) => (
-              <form onSubmit={handleSubmit}>
-                <Box mb={3}>
-                  <Grid container spacing={3}>
-                    <Grid item sm={6} xs={12}>
-                      <TextField
-                        fullWidth
-                        name="card_no"
-                        label="Card Number"
-                        onBlur={handleBlur}
-                        value={values.card_no}
-                        onChange={handleChange}
-                        helperText={touched.card_no && errors.card_no}
-                      />
-                    </Grid>
-                    <Grid item sm={6} xs={12}>
-                      <TextField
-                        fullWidth
-                        name="exp_date"
-                        label="Exp Date"
-                        placeholder="MM/YY"
-                        onBlur={handleBlur}
-                        onChange={handleChange}
-                        value={values.exp_date}
-                        helperText={touched.exp_date && errors.exp_date}
-                      />
-                    </Grid>
-                    <Grid item sm={6} xs={12}>
-                      <TextField
-                        fullWidth
-                        name="name"
-                        onBlur={handleBlur}
-                        value={values.name}
-                        label="Name on Card"
-                        onChange={handleChange}
-                        helperText={touched.name && errors.name}
-                      />
-                    </Grid>
-                    <Grid item sm={6} xs={12}>
-                      <TextField
-                        fullWidth
-                        name="name"
-                        onBlur={handleBlur}
-                        value={values.name}
-                        label="Name on Card"
-                        onChange={handleChange}
-                        helperText={touched.name && errors.name}
-                      />
-                    </Grid>
-                  </Grid>
-                </Box>
-
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  sx={{
-                    mb: 4,
-                  }}
-                >
-                  Submit
-                </Button>
-
-                <Divider
-                  sx={{
-                    mb: 3,
-                    mx: -4,
-                  }}
-                />
-              </form>
-            )}
-          </Formik>
-        )}
-
-        <FormControlLabel
-          name="paypal"
-          sx={{
-            mb: 3,
-          }}
-          onChange={handlePaymentMethodChange}
-          label={<Paragraph fontWeight={600}>Pay with Paypal</Paragraph>}
-          control={
-            <Radio
-              checked={paymentMethod === "paypal"}
-              color="primary"
-              size="small"
-            />
-          }
-        />
-
-        <Divider
-          sx={{
-            mb: 3,
-            mx: -4,
-          }}
-        />
-
-        {paymentMethod === "paypal" && (
-          <Fragment>
-            <FlexBox alignItems="flex-end" mb={4}>
-              <TextField
-                fullWidth
-                name="email"
-                type="email"
-                label="Paypal Email"
-                sx={{
-                  mr: isMobile ? "1rem" : "30px",
-                }}
-              />
-              <Button variant="outlined" color="primary" type="button">
-                Submit
-              </Button>
-            </FlexBox>
-
-            <Divider
-              sx={{
-                mb: 3,
-                mx: -4,
-              }}
-            />
-          </Fragment>
-        )}
-
+        
         <FormControlLabel
           name="cod"
           onChange={handlePaymentMethodChange}
@@ -205,20 +204,10 @@ const PaymentForm = () => {
 
       <Grid container spacing={7}>
         <Grid item sm={6} xs={12}>
-          <Link href="/checkout" passHref>
-            <Button variant="outlined" color="primary" type="button" fullWidth>
-              Back to checkout details
-            </Button>
-          </Link>
-        </Grid>
-        <Grid item sm={6} xs={12}>
-          <Link href="/orders" passHref>
-            <Button variant="contained" color="primary" type="submit" fullWidth>
-              Review
-            </Button>
-          </Link>
+          <button type="button" className="btn btn-primary mx-1" onClick={ (e) => submitOrder(e, 'cod') }>Place Order</button>
         </Grid>
       </Grid>
+
     </Fragment>
   );
 };

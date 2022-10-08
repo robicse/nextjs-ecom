@@ -145,6 +145,29 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const orderPlace = async (values) => {
+    try {
+      const data = state.cartList;
+      //Object.entries(values).forEach(([key, value]) => data.append(key, value));
+      await Axios.post(
+        `${BASE_URL}/api/version1/order/store`,
+        data
+      );
+      cogoToast.success(`${"Order Successful!"}`, {
+        position: "top-right",
+        bar: { size: "10px" },
+      });
+
+      return true;
+    } catch (err) {
+      cogoToast.error(`${res?.data?.response}`, {
+        position: "top-right",
+        bar: { size: "10px" },
+      });
+      return false;
+    }
+  };
+
   const sellerResistration = async (values) => {
     try {
       const data = new FormData();
@@ -209,13 +232,13 @@ const AuthProvider = ({ children }) => {
 
   const getAllCartList = async () => {
     try {
-      // const res = await Axios.get(
-      //   `http://ecommerce.staritltd-devemon.one/api/v1/cart`,
-      //   config
-      // );
-      // if (!!res?.data?.data.length) {
-        dispatch({ type: "SET_ALL_WISH_LIST", payload: [] });
-      // }
+      const res = await Axios.get(
+        `${BASE_URL}/api/version1/carts`,
+        config
+      );
+      if (!!res?.data?.data.length) {
+        dispatch({ type: "SET_ALL_CART_LIST", payload: [] });
+      }
     } catch (err) {
       console.log(err);
     }
@@ -519,6 +542,7 @@ const AuthProvider = ({ children }) => {
         updateCustomerProfile,
         getCustomerPurchaseHistory,
         getCustomerPurchaseHistoryDetailById,
+        orderPlace
       }}
     >
       {children}
