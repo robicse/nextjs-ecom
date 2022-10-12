@@ -293,14 +293,12 @@ const AuthProvider = ({ children }) => {
   const addNewWishList = async (productId) => {
     console.log(productId)
     try {
-      //const result =  await api.getCustomerProfile()
       const res = await Axios.post(
         `${BASE_URL}/api/version1/wishlists`,
         { product_id: productId },
         config
       );
       console.log(res)
-      // console.log(res.data?.response?.data)
       dispatch({
         type: "SET_ALL_WISH_LIST",
         payload: res.data?.response?.data,
@@ -311,13 +309,11 @@ const AuthProvider = ({ children }) => {
       });
     } catch (err) {
       console.log(err);
-      // console.log(err)
     }
   };
 
   const removefromWishList = async (wishListId) => {
     try {
-      //const result =  await api.getCustomerProfile()
       const res = await Axios.delete(
         `${BASE_URL}/api/version1/wishlists/${wishListId}`,
         config
@@ -332,23 +328,19 @@ const AuthProvider = ({ children }) => {
       });
     } catch (err) {
       console.log(err);
-      // console.log(err)
     }
   };
 
   const getAllAddress = async (p) => {
-    // try {
+    try {
       const res = await Axios.get(
         `https://bme.com.bd/api/version1/user/shipping/address`,
         config
       );
       return res?.data;
-      // if (!!res?.data?.data.length) {
-      //   dispatch({ type: "SET_ALL_WISH_LIST", payload: res?.data?.data });
-      // }
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const addAddress = async (value) => {
@@ -414,35 +406,6 @@ const AuthProvider = ({ children }) => {
       return null;
     }
   };
-
-  // const updateCustomerProfile = async (data) => {
-  //   const FormatConfig = {
-  //     headers: {
-  //       Authorization: `Bearer ${state.token}`,
-  //       "Content-Type": "multipart/form-data",
-  //     },
-  //   };
-  //   try {
-  //     const res = await Axios.put(
-  //       `${BASE_URL}/api/version1/customer-profile/update`,
-  //       data,
-  //       config
-  //     );
-  //     dispatch({ type: "SET_CUSTOMER_PROFILE", payload: res?.data?.response });
-  //     cogoToast.success(`${res?.data?.msg}`, {
-  //       position: "top-right",
-  //       bar: { size: "10px" },
-  //     });
-  //     console.log(res);
-  //     return true;
-  //   } catch (error) {
-  //     cogoToast.error(`${res?.data?.response}`, {
-  //       position: "top-right",
-  //       bar: { size: "10px" },
-  //     });
-  //     return false;
-  //   }
-  // };
 
   const updateCustomerProfile = async (value) => {
     try {
@@ -515,7 +478,6 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  //console.log(Axios.defaults?.headers,'138')
   return (
     <AuthContext.Provider
       value={{

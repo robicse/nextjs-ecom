@@ -231,6 +231,16 @@ const getBigDiscountList = async () => {
   return response.data;
 }; // eslint-disable-next-line import/no-anonymous-default-export
 
+const getPrivacyPolicy = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/api/version1/policies/privacy-policy`);
+    return response?.data?.data
+  } catch (error) {
+    // console.log(error)
+    return null;
+  }
+};
+
 export default {
   generalSetting,
   getMainCarousel,
@@ -258,5 +268,6 @@ export default {
   getMoreItems,
   getServiceList,
   getBestSellerProductList,
-  getProductDetailsById
+  getProductDetailsById,
+  getPrivacyPolicy
 };

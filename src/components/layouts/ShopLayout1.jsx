@@ -20,15 +20,16 @@ import React, { Fragment, useCallback, useState } from "react";
 const ShopLayout1 = ({
   navbar,
   children,
-  generalSetting
-  // title = "Ecommerce",
+  generalSetting,
+  title = "Ecommerce",
 }) => {
   const [isFixed, setIsFixed] = useState(false);
   const toggleIsFixed = useCallback((fixed) => setIsFixed(fixed), []);
   return (
     <Fragment>
       <Head>
-        <title>{generalSetting?.site_name}</title>
+        {/* <title>{generalSetting?.site_name}</title> */}
+        <title>{title}</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>

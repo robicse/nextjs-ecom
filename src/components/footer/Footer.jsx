@@ -251,10 +251,10 @@ const Footer = ({generalSetting}) => {
                 </Link> */}
 
                 <Paragraph mb={2.5} color="grey.500">
-             {generalSetting?.description}
+                  {generalSetting?.description}
                 </Paragraph>
 
-                <AppStore />
+                {/* <AppStore /> */}
               </Grid>
 
               <Grid item lg={2} md={6} sm={6} xs={12}>
@@ -267,13 +267,16 @@ const Footer = ({generalSetting}) => {
                 >
                   About Us
                 </Box>
-
                 <div>
-                  {aboutLinks.map((item, ind) => (
-                    <Link href="/" key={ind} passHref>
-                      <StyledLink>{item}</StyledLink>
-                    </Link>
-                  ))}
+                  <Link href="/pages/privacy-policy" passHref>
+                    <StyledLink>Privacy Policy</StyledLink>
+                  </Link>
+                  <Link href="/pages/privacy-policy" passHref>
+                    <StyledLink>Terms and Conditions</StyledLink>
+                  </Link>
+                  <Link href="/pages/privacy-policy" passHref>
+                    <StyledLink>Return & Refund Policy</StyledLink>
+                  </Link>
                 </div>
               </Grid>
 
@@ -285,16 +288,16 @@ const Footer = ({generalSetting}) => {
                   lineHeight="1"
                   color="white"
                 >
-                  Customer Care
+                  Branch
                 </Box>
 
-                <div>
+                {/* <div>
                   {customerCareLinks.map((item, ind) => (
                     <Link href="/" key={ind} passHref>
                       <StyledLink>{item}</StyledLink>
                     </Link>
                   ))}
-                </div>
+                </div> */}
               </Grid>
 
               <Grid item lg={3} md={6} sm={6} xs={12}>

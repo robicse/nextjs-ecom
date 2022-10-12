@@ -86,7 +86,8 @@ const Header = ({ isFixed,generalSetting, className, searchBoxType = "type2" }) 
               <Image
                 height={28}
                 mb={0.5}
-                src={`${BASE_URL}/public/${generalSetting?.logo}`}
+                //src={`${BASE_URL}/public/${generalSetting?.logo}`}
+                src={`https://bme.com.bd/public/uploads/logo/MRVmzUb8Z7OfwOSSpLJRf22lepdrh0doGFOyz2nh.png`}
                 alt="logo"
               />
             </a>
