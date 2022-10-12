@@ -6,6 +6,7 @@ import ProductIntro from "components/products/ProductIntro";
 import ProductReview from "components/products/ProductReview";
 import RelatedProducts from "components/products/RelatedProducts";
 import { H2 } from "components/Typography";
+import parse from 'html-react-parser';
 import { useEffect, useState } from "react";
 import {
   getFrequentlyBought,
@@ -43,15 +44,18 @@ const ProductDetails = (props) => {
       description: item?.description
     }
   }
-  const {productDetails,reviewsProduct,relatedProducts} = props
+  const {productDetails,reviewsProduct,relatedProducts, generalSetting} = props
   const product = itemChange(productDetails);
-// console.log('product',product)
+  // console.log('product',product)
+  //  console.log('relatedProducts',relatedProducts)
   const [selectedOption, setSelectedOption] = useState(0);
 
   const handleOptionClick = (_, value) => setSelectedOption(value);
+  const title = product.title;
+  const description = parse(product.description);
 
   return (
-    <ShopLayout1 navbar={<Navbar />}>
+    <ShopLayout1 title={title} description={description} generalSetting={generalSetting} navbar={<Navbar />}>
       <Container
         sx={{
           my: 4,
@@ -98,6 +102,7 @@ export  const getStaticPaths = async()=> {
 }
 
 export  const getStaticProps = async(context)=> {
+  const generalSetting = await api.generalSetting();
   const { params } = context;
   const productDetails = await api.getProductDetailsById(params.id)
   const reviewsProduct = await api.getReviewsProduct(params.id);
@@ -105,6 +110,7 @@ export  const getStaticProps = async(context)=> {
 
  return {
    props: {
+    generalSetting,
     productDetails,
     reviewsProduct,
     relatedProducts

@@ -68,6 +68,7 @@ const ProductCard1 = ({
   discount = 5,
   showProductSize,
 }) => {
+  // console.log('title3333', title)
   // const { state, dispatch } = useAppContext();
   const { token, user, wishList, addNewWishList, removefromWishList, cartList, addToCart, removeFromCart
   } =
@@ -91,29 +92,29 @@ const ProductCard1 = ({
     }
   };
 
-  const handleCartList = (type, idType) => {
-    if (!user) {
-      return alert("Please Login");
-    }
-    if (type == "add") {
-      addToCart(idType);
-    }
-    if (type == "remove") {
-      removeFromCart(idType);
-    }
-  };
+  // const handleCartList = (type, idType) => {
+  //   if (!user) {
+  //     return alert("Please Login");
+  //   }
+  //   if (type == "add") {
+  //     addToCart(idType);
+  //   }
+  //   if (type == "remove") {
+  //     removeFromCart(idType);
+  //   }
+  // };
 
 
 
 
-  const handleCartAmountChange = useCallback(
-    (product) => () =>
-      dispatch({
-        type: "CHANGE_CART_AMOUNT",
-        payload: product,
-      }),
-    []
-  );
+  // const handleCartAmountChange = useCallback(
+  //   (product) => () =>
+  //     dispatch({
+  //       type: "CHANGE_CART_AMOUNT",
+  //       payload: product,
+  //     }),
+  //   []
+  // );
   return (
     <StyledBazarCard hoverEffect={hoverEffect}>
       <ImageWrapper>

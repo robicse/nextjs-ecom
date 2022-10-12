@@ -22,6 +22,7 @@ const ShopLayout1 = ({
   children,
   generalSetting,
   title = "Ecommerce",
+  description = "Buy Toshiba E-Studio 2020AC MFP 20 cpm/ppm Copier Machine with Best Price available our Online Shop and in Store at BME.",
 }) => {
   const [isFixed, setIsFixed] = useState(false);
   const toggleIsFixed = useCallback((fixed) => setIsFixed(fixed), []);
@@ -32,6 +33,7 @@ const ShopLayout1 = ({
         <title>{title}</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="description" content={description} />
       </Head>
 
       <Topbar generalSetting={generalSetting}/>

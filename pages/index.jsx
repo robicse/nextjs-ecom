@@ -37,10 +37,11 @@ const IndexPage = (props) => {
   const { asPath, pathname } = useRouter();
   // console.log(pathname)
   const defaulCategoryShow = pathname == '/' ? true : false
-  console.log('categoryProductList',categoryProductList)
+  // console.log('categoryProductList',categoryProductList)
+  const title = 'BME - Computer, Printer, Telecom & Security Devices Retailer in Bangladesh.';
 
   return (
-    <ShopLayout1 generalSetting={generalSetting}>
+    <ShopLayout1 title={title} generalSetting={generalSetting}>
       <Navbar navListOpen={defaulCategoryShow} topCategories={topCategories}/>
       <Section1 carouselData={mainCarouselData}/>
       {/* <Section5 newArrivalsList={newArrivalsList} /> */}
